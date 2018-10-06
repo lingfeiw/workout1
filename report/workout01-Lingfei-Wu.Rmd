@@ -1,0 +1,78 @@
+---
+title: "workout01-Lingfei-Wu"
+author: "Lingfei Wu"
+date: "October 2, 2018"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,fig.path = '../report/workout01-Lingfei-Wu_files/')
+```
+
+```{r}
+dat <- read.csv('../data//nba2018-teams.csv')
+library('ggplot2')
+```
+
+
+
+```{r NBA Teams Ranked by Total Salary}
+ggplot(dat, aes(x=reorder(team,salary),y=salary)) +
+  geom_bar(stat='identity') +
+  coord_flip()+ 
+  geom_hline(yintercept=mean(dat$salary),color="red",size=2)+
+  xlab("Team") + ylab("Salary(in millions)")+labs(title="NBA Teams Ranked by Total Salary")
+
+```
+
+
+```{r NBA Teams Ranked by Total Points}
+ggplot(dat, aes(x=reorder(team,points),y=points)) +
+  geom_bar(stat='identity') +
+  coord_flip()+ 
+  geom_hline(yintercept=mean(dat$points),color="red",size=2)+
+  xlab("Team") + ylab("Points")+labs(title="NBA Teams Ranked by Total Points")
+
+```
+
+
+```{r NBA Teams Ranked by Total Efficiency}
+ggplot(dat, aes(x=reorder(team,efficiency),y=efficiency)) +
+  geom_bar(stat='identity') +
+  coord_flip()+ 
+  geom_hline(yintercept=mean(dat$efficiency),color="red",size=2)+
+  xlab("Team") + ylab("Efficiency")+labs(title="NBA Teams Ranked by Total Efficiency")
+
+```
+
+
+```{r}
+myefficiency <-  1-4*(dat$turnovers+dat$fouls)/(dat$points+dat$off_rebounds
+             +dat$def_rebounds+dat$assists+dat$steals+dat$blocks+dat$turnovers)
+``` 
+
+I first compute the ratio of negative behaviors to positive behaviors, and enlarge this error rate by 4 times. Since the team who has the larger error rate performs worse, I use 1 to subtract it and get my efficiency.
+
+
+```{r NBA Teams Ranked by My Efficiency}
+ggplot(dat, aes(x=reorder(team,myefficiency),y=myefficiency)) +
+  geom_bar(stat='identity') +
+  coord_flip()+ 
+  geom_hline(yintercept=mean(myefficiency),color="red",size=2)+
+  xlab("Team") + ylab("My Efficiency")+labs(title="NBA Teams Ranked by My Efficiency")
+
+```
+
+
+
+### Comments and Reflections
+* Yes.I think we should be more cautious about the path.
+* No.
+* No.
+* Using ggplot and push the commits to my github repository.
+* Writing the data dictionary.
+* No.
+* 7 hours.
+* Ranking the teams.
+* Working with the file structure.
+
